@@ -1,6 +1,25 @@
 'use strict'
 
 const router = require('express').Router()
+const { Candies } = require('../db/index');
+
+router.get('/candies', async (req, res, next) => {
+  try {
+    const result = await Candies.findAll();
+    res.send(result);
+  } catch (err) {
+    console.log(err);
+  }
+})
+
+router.get('/candies/:id', async (req, res, next) => {
+  try {
+    const result = await Candies.findById(req.params.id);
+    res.send(result);
+  } catch (err) {
+    console.log(err);
+  }
+})
 
 // Your routes go here!
 // NOTE: Any routes that you put here are ALREADY mounted on `/api`
